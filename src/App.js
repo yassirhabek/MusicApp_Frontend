@@ -1,4 +1,5 @@
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState, useEffect } from 'react';
 import storage from './firebaseConfig';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
@@ -53,15 +54,19 @@ function App() {
         }
 
  return (
-     <div className='Main'>
-        <div className='SongData'>
-            <Textfield type="text" id="songName" label="Song Name" variant="outlined"/>
-            <Textfield type="text" id="artistName" label="Artist Name" variant="outlined"/>
-        </div>
-        <div className='FileUpload'>
-         <input type="file" onChange={handleChange} accept="audio/* " />
-         <Button onClick={handleUpload}>Upload</Button>
-         <p>{percent}% done</p>
+     <div className='container uploadScreen'>
+        <div className="row justify-content-center">
+          <div className='col-4'>
+            <Textfield type="text" className='mb-3 songName' id="songName" label="Song Name" variant="outlined"/>
+            <Textfield type="text" className='artistName' id="artistName" label="Artist Name" variant="outlined"/>
+          </div>
+          
+          <div className='col-4'>
+            <input type="file" onChange={handleChange} accept="audio/*" id="fileinput" hidden/>
+            <label for="fileinput" className='fileLable'>Choose File</label>
+            <Button variant="contained" className="mt-5" onClick={handleUpload}>Upload</Button>
+            <p>{percent}% done</p>
+          </div>
         </div>
      </div>
  );
