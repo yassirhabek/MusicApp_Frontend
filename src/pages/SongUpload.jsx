@@ -1,7 +1,7 @@
-import './App.css';
+import '../css/SongUpload.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState, useEffect } from 'react';
-import storage from './firebaseConfig';
+import storage from '../firebaseConfig';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import Button from '@mui/material/Button';
 import Textfield from '@mui/material/TextField';
@@ -15,6 +15,15 @@ function App() {
 
  function handleChange(event) {
      setFile(event.target.files[0]);
+ }
+
+ function postSong(){
+    fetch("https://localhost:7023/Song?" + new URLSearchParams({
+        title: document.getElementById("songName").value,
+        artist: document.getElementById("artistName").value,
+        songLink: songUrl}), {method: "POST"})
+        .then(response => response.json())
+        .then(data => console.log("succesful", data));
  }
 
  const handleUpload = () => {
@@ -34,7 +43,7 @@ function App() {
      uploadTask.on(
          "state_changed",
          (snapshot) => {
-             const percent = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+             const percent = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
              setPercent(percent); 
          },
          (err) => console.log(err),
@@ -45,13 +54,8 @@ function App() {
          }
      );
 
-     fetch("https://localhost:7023/Song?" + new URLSearchParams({
-        title: document.getElementById("songName").value,
-        artist: document.getElementById("artistName").value,
-        url: songUrl}), {method: "POST"})
-        .then(response => response.json())
-        .then(data => console.log(data));
-        }
+     postSong();
+    }
 
  return (
      <div className='container uploadScreen'>
@@ -64,7 +68,7 @@ function App() {
           <div className='col-4'>
             <input type="file" onChange={handleChange} accept="audio/*" id="fileinput" hidden/>
             <label for="fileinput" className='fileLable'>Choose File</label>
-            <Button variant="contained" className="mt-5" onClick={handleUpload}>Upload</Button>
+            <Button variant="contained" className=" " onClick={handleUpload}>Upload</Button>
             <p>{percent}% done</p>
           </div>
         </div>
