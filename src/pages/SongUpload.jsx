@@ -6,7 +6,7 @@ import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import Button from '@mui/material/Button';
 import Textfield from '@mui/material/TextField';
 
-function App() {
+function SongUpload() {
  const [file, setFile] = useState("");
  const [songUrl, setUrl] = useState("");
  const [percent, setPercent] = useState(0);
@@ -22,7 +22,7 @@ function App() {
         title: document.getElementById("songName").value,
         artist: document.getElementById("artistName").value,
         songLink: songUrl}), {method: "POST"})
-        .then(response => response.json())
+        .then(response => console.log(response))
         .then(data => console.log("succesful", data));
  }
 
@@ -57,18 +57,18 @@ function App() {
      postSong();
     }
 
- return (
+  return (
      <div className='container uploadScreen'>
         <div className="row justify-content-center">
           <div className='col-4'>
-            <Textfield type="text" className='mb-3 songName' id="songName" label="Song Name" variant="outlined"/>
+            <Textfield type="text" className='mb-3 songName' id="songName" label="Song Name" variant="outlined" />
             <Textfield type="text" className='artistName' id="artistName" label="Artist Name" variant="outlined"/>
           </div>
           
           <div className='col-4'>
             <input type="file" onChange={handleChange} accept="audio/*" id="fileinput" hidden/>
-            <label for="fileinput" className='fileLable'>Choose File</label>
-            <Button variant="contained" className=" " onClick={handleUpload}>Upload</Button>
+            <label for="fileinput" className='fileLable'>Choose File</label> <br/>
+            <Button variant="contained" className="mt-1" onClick={handleUpload}>Upload</Button>
             <p>{percent}% done</p>
           </div>
         </div>
@@ -76,4 +76,4 @@ function App() {
  );
 }
 
-export default App;
+export default SongUpload;
