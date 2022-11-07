@@ -1,10 +1,11 @@
-import '../css/SongUpload.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useState, useEffect } from 'react';
 import storage from '../firebaseConfig';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import Button from '@mui/material/Button';
 import Textfield from '@mui/material/TextField';
+
+import classes from '../css/SongUpload.module.css';
 
 function SongUpload() {
  const [file, setFile] = useState("");
@@ -19,11 +20,11 @@ function SongUpload() {
 
  function postSong(){
     fetch("https://localhost:7023/Song?" + new URLSearchParams({
-        title: document.getElementById("songName").value,
-        artist: document.getElementById("artistName").value,
-        songLink: songUrl}), {method: "POST"})
-        .then(response => console.log(response))
-        .then(data => console.log("succesful", data));
+      title: document.getElementById("songName").value,
+      artist: document.getElementById("artistName").value,
+      songLink: songUrl}), {method: "POST"})
+      .then(response => console.log(response))
+      .then(data => console.log("succesful", data));
  }
 
  const handleUpload = () => {
@@ -58,18 +59,20 @@ function SongUpload() {
     }
 
   return (
-     <div className='container uploadScreen'>
-        <div className="row justify-content-center">
-          <div className='col-4'>
-            <Textfield type="text" className='mb-3 songName' id="songName" label="Song Name" variant="outlined" />
-            <Textfield type="text" className='artistName' id="artistName" label="Artist Name" variant="outlined"/>
-          </div>
-          
-          <div className='col-4'>
-            <input type="file" onChange={handleChange} accept="audio/*" id="fileinput" hidden/>
-            <label for="fileinput" className='fileLable'>Choose File</label> <br/>
-            <Button variant="contained" className="mt-1" onClick={handleUpload}>Upload</Button>
-            <p>{percent}% done</p>
+     <div className='container'>
+        <div className={classes.uploadScreen}>
+          <div className="row justify-content-center">
+            <div className='col-4'>
+              <Textfield type="text" className='songName mb-3 mr-3' id="songName" label="Song Name" variant="filled" />
+              <Textfield type="text" className='artistName mr-3' id="artistName" label="Artist Name" variant="filled"/>
+            </div>
+            
+            <div className='col-4'>
+              <input type="file" onChange={handleChange} accept="audio/*" id="fileinput" hidden/>
+              <label for="fileinput" className={classes.fileLable}>Choose File</label> <br/>
+              <Button variant="contained" className="mt-1" onClick={handleUpload}>Upload</Button>
+              <p>{percent}% done</p>
+            </div>
           </div>
         </div>
      </div>
