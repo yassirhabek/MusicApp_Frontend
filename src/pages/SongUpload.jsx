@@ -1,41 +1,55 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import storage from '../firebaseConfig';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import Button from '@mui/material/Button';
 import Textfield from '@mui/material/TextField';
 
 import classes from '../css/SongUpload.module.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function SongUpload() {
- const [file, setFile] = useState("");
- const [songUrl, setUrl] = useState("");
+ const [file, setFile] = useState(" ");
  const [percent, setPercent] = useState(0);
-
- useEffect(() => console.log(songUrl), [songUrl]);
 
  function handleChange(event) {
      setFile(event.target.files[0]);
  }
 
- function postSong(){
-    fetch("https://localhost:7023/Song?" + new URLSearchParams({
+ function postSong(songUrl){
+  try{
+    if (songUrl === " ") {
+      throw new Error("No URL Found");
+    }
+    console.log("postSong");
+    const response = fetch("https://localhost:7023/Song?" + new URLSearchParams({
       title: document.getElementById("songName").value,
       artist: document.getElementById("artistName").value,
-      songLink: songUrl}), {method: "POST"})
-      .then(response => console.log(response))
-      .then(data => console.log("succesful", data));
+      songLink: songUrl}), {method: "POST"});
+
+      // if (!response.ok) {
+      //   throw new Error  (`Error! status: ${response.status}`);
+      // }
+
+      alert("Upload successful");
+      window.location.href = "http://localhost:3000/";
+  }
+  catch(err){
+    console.log(err);
+  }
  }
 
  const handleUpload = () => {
      if (!file) {
         alert("Please upload an song first!");
+        return;
      }
      if (document.getElementById("songName").value === ""){
         alert("Please enter a song name");
+        return;
      }
      if (document.getElementById("artistName").value === ""){
         alert("Please enter an artist name");
+        return;
      }
 
      const storageRef = ref(storage, `/files/${file.name}`);
@@ -44,27 +58,26 @@ function SongUpload() {
      uploadTask.on(
          "state_changed",
          (snapshot) => {
-             const percent = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-             setPercent(percent); 
+            const percent = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+            setPercent(percent); 
          },
-         (err) => console.log(err),
+         (err) => alert(err),
          () => {
-             getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-                  setUrl(url);
-             });
+          getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+              console.log(url);
+              postSong(url);
+          });
          }
      );
-
-     postSong();
     }
 
   return (
-     <div className='container'>
+    <div className='container'>
         <div className={classes.uploadScreen}>
           <div className="row justify-content-center">
             <div className='col-4'>
-              <Textfield type="text" className='songName mb-3 mr-3' id="songName" label="Song Name" variant="filled" />
-              <Textfield type="text" className='artistName mr-3' id="artistName" label="Artist Name" variant="filled"/>
+              <Textfield type="text" className='Textfield mb-3 mr-3' id="songName" label="Song Name" variant="filled"S />
+              <Textfield type="text" className='Textfield mr-3' id="artistName" label="Artist Name" variant="filled"/>
             </div>
             
             <div className='col-4'>
@@ -75,8 +88,8 @@ function SongUpload() {
             </div>
           </div>
         </div>
-     </div>
- );
+    </div>
+  );
 }
 
 export default SongUpload;

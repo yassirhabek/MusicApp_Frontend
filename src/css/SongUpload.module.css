@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@100;300;400;700;900&display=swap');
 body{
-    background-color: #acc1d8;
+    background-color: #ECECEC ;
 }
 
 .uploadScreen{
@@ -13,12 +13,16 @@ body{
 
 .fileLable {
     background-color: #1976D2;
-    color: white;
+    color: whitesmoke;
     padding: 0.5rem;
     font-family: 'Lato', sans-serif;
     border-radius: 0.3rem;
     cursor: pointer;
     margin-top: 0rem;
+}
+
+.Textfield{
+    color: whitesmoke;
 }
 
 p {

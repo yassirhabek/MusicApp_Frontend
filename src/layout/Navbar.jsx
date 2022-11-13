@@ -15,7 +15,7 @@ function Navbar() {
                 <div class="navbar-nav">
                     <Link class="nav-link" to="/">Home</Link>
                     <Link class="nav-link" to="/SongUpload">Add Song</Link>
-                    <Link class="nav-link" to="#">???</Link>
+                    <Link class="nav-link" to="/Chatroom">Chatroom</Link>
                 </div>
             </div>
         </div>
