@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import MusicCard from "../components/Musiccard.jsx";
+import MusicCard from "../components/Musiccard";
 
 import "../css/Home.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -11,9 +11,6 @@ function Home() {
     useEffect(() => {
         getAllSongs();
         console.log("dddd");
-        setTimeout(() => {
-            setIsLoading(false);
-        }, 2000);
     }, []);
 
     async function getAllSongs(){
@@ -27,6 +24,7 @@ function Home() {
             const result = await response.json();
             setSongs(result);
             console.log(result);
+            setIsLoading(false);
             return result;
         } catch (err) {
             console.log(err);

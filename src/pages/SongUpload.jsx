@@ -12,7 +12,7 @@ function SongUpload() {
  const [percent, setPercent] = useState(0);
 
  function handleChange(event) {
-     setFile(event.target.files[0]);
+    setFile(event.target.files[0]);
  }
 
  function postSong(songUrl){
