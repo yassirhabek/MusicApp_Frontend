@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { json, Link, useLocation } from "react-router-dom";
 import LogoutIcon from "../icons/logout.svg";
 
 import "../css/Navbar.css";
@@ -13,12 +13,13 @@ function Navbar() {
         const response = fetch('https://localhost:7023/Credentials/Logout', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            credentials: 'include'
-        });
-        if (response.ok) {
+            credentials: 'include',
+            withCredentials: true});
+        if (response.status === undefined) {
             window.location.href = "http://localhost:3000/Login";
         }
         else{
+            console.log("Logout failed:" + JSON.stringify(response));
             alert("Server Error: HTTP Status Code " + response.status);
         }
     }

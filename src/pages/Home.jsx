@@ -13,6 +13,8 @@ function Home() {
         console.log("dddd");
     }, []);
 
+
+
     async function getAllSongs(){
         try {
             const response = await fetch('https://localhost:7023/Song', {method: 'GET', headers: {accept: 'application/json'}});
@@ -37,6 +39,7 @@ function Home() {
     );
     }
     else {
+        console.log(localStorage.getItem("jwt"));
         return(
             <div className="gridContainer">
                 {Songs.map((song, index) => {

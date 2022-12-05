@@ -7,7 +7,7 @@ import Chatroom from "./pages/Chatroom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 
-export default function App() {
+export default function Index() {
   return (
     <BrowserRouter>
       <Routes>
@@ -24,4 +24,4 @@ export default function App() {
   );
 }
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<Index />, document.getElementById("root"));
