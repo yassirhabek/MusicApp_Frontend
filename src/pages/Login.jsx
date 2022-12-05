@@ -2,7 +2,6 @@ import React from "react";
 import { useState } from "react";
 import "../css/Login.module.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 function LoginPage(){
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -12,7 +11,8 @@ function LoginPage(){
       {username: username, password: password}), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      credentials: 'include'});
+      credentials: 'include',
+      withCredentials: true});
     if (response.ok) {
       window.location.href = "http://localhost:3000/";
     }
@@ -20,7 +20,6 @@ function LoginPage(){
       alert("Invalid credentials:" + response.status);
     }
   }
-
 
   return (
     <div class="cotainer">
