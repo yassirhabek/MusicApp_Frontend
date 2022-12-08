@@ -22,7 +22,7 @@ unit-test-job:
     - npm test
 
 docker-build:
-  stage: build
+  stage: deploy
   image: docker:latest
   services: 
     - name: docker:19.03.8-dind
