@@ -10,8 +10,6 @@ build-job:
       - npm install
       - npm run build
       - echo Succesful build!
-  env:
-    CI: ""
   artifacts:
     paths:
       - ./build
