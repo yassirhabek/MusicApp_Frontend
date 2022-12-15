@@ -37,10 +37,6 @@ build-image:
     DOCKER_TLS_CERTDIR: ""
 
 
-  before_script:
-    - docker info 
-
-
   services:
     - docker:20.10.16-dind
 
