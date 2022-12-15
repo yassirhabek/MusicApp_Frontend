@@ -8,12 +8,16 @@ build-job:
   image: node
   script:
       - npm install
-      - npm build
+      - npm run build
+      - echo Succesful build!
+  env:
+    CI: ""
   artifacts:
-    expire_in: 1 hour
     paths:
-      - build
-      - node_modules/
+      - ./build
+  only:
+    - main
+
 
 unit-test-job:
   stage: test 
