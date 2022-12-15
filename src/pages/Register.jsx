@@ -35,25 +35,25 @@ function RegisterPage() {
         <div class="form-row">
             <div class="col form-group">
                 <label>Username</label>   
-                    <input type="text" class="form-control" placeholder="" onChange={e => setUsername(e.target.value)}/>
+                    <input type="text" class="form-control" name="username" placeholder="" onChange={e => setUsername(e.target.value)}/>
             </div>
             <div class="col form-group">
                 <label>Email</label>
-                    <input type="email" class="form-control" placeholder=" " onChange={e => setEmail(e.target.value)}/>
+                    <input type="email" class="form-control" name="email" placeholder="" onChange={e => setEmail(e.target.value)}/>
             </div> 
         </div>
         <div class="form-group">
             <label>Password</label>
-            <input type="password" class="form-control" onChange={e => setPassword(e.target.value)} />
+            <input type="password" class="form-control" name="password" onChange={e => setPassword(e.target.value)} />
         </div>
         <div class="form-group">
             <label>Verify Password</label>
-            <input class="form-control" type="password"onChange={e => setVerPass(e.target.value)} />
+            <input class="form-control" type="password" name="verPass" onChange={e => setVerPass(e.target.value)} />
         </div> 
         <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block" onClick={Register}> Register  </button>
+            <button type="submit" id="submit" class="btn btn-primary btn-block" onClick={Register}> Register  </button>
         </div>                                         
-        <div class="border-top card-body text-center">Have an account? <a href="">Log In</a></div>
+        <div class="border-top card-body text-center">Have an account? <a href="/Login" id="loginLink">Log In</a></div>
         </div> 
         </div>
         </div>

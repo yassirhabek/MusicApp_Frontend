@@ -43,10 +43,10 @@ function LoginPage(){
                             </div>
 
                             <div class="col-md-6 offset-md-4">
-                                <button class="btn btn-primary" onClick={Login}>
+                                <button class="btn btn-primary" id="submit" onClick={Login}>
                                     Login
                                 </button>
-                                <a href="/Register" class="btn btn-link">
+                                <a href="/Register" id="registerLink" class="btn btn-link">
                                     Register
                                 </a>
                             </div>

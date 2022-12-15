@@ -44,7 +44,7 @@ function Navbar() {
                         <Link class="nav-link active" aria-current="page" to="/Chatroom">Chatroom</Link>
                     </div>
 
-                    <div class="logout-button" onClick={Logout}>
+                    <div class="logout-button" id="logoutButton" onClick={Logout}>
                         <img src={LogoutIcon} />
                     </div>
 
