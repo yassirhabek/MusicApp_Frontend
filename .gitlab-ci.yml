@@ -10,11 +10,15 @@ build-job:
       - npm install
       - npm run build
       - echo Succesful build!
+  env:
+    CI: ""
   artifacts:
     paths:
       - ./build
   only:
     - main
+
+
 unit-test-job:
   stage: test 
   image: node
