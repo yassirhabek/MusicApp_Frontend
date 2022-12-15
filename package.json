@@ -2,7 +2,7 @@
   "name": "spotify-react",
   "version": "0.1.0",
   "private": true,
-  "depende  ncies": {
+  "dependecies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@microsoft/signalr": "^7.0.0",
