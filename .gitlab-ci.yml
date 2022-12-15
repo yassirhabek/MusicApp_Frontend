@@ -12,8 +12,8 @@ build-job:
       - echo Succesful build!
   artifacts:
     paths:
-      - ./build
-      - ./node_modules/
+      - build
+      - node_modules/
   only:
     - main
 
