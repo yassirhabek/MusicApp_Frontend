@@ -29,7 +29,7 @@ build-image:
   stage: deploy
 
   image: 
-    name: docker:20.10.16
+    name: docker:19
 
   variables:
     DOCKER_HOST: tcp://docker:2375
@@ -38,7 +38,7 @@ build-image:
 
 
   services:
-    - docker:20.10.16-dind
+    - docker:19-dind
 
   script:
     - docker login -u yassirhabek -p Vredeoord123
