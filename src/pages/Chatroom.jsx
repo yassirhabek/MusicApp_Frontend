@@ -48,12 +48,12 @@ function Chatroom(){
         <div className='Chatroom'>  
             <header className='Chatroom-header'>
                 <h1>Chatroom</h1>
-                <input value={text} onChange={(e) => {setText(e.target.value)}}/>
-                <button onClick={sendMessage}>Send</button>
+                <input id="messageField" value={text} onChange={(e) => {setText(e.target.value)}}/>
+                <button id="buttonChat" onClick={sendMessage}>Send</button>
 
                 <div>
                     <h2>messages</h2>
-                    <ul>
+                    <ul id='messages'>
                         {messageList.map((item, index) => {
                             return <li key={index}>{item}</li>
                             })}

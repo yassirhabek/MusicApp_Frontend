@@ -41,6 +41,7 @@ function Navbar() {
                     <div class="navbar-nav">
                         <Link class="nav-link active" aria-current="page" to="/">Home</Link>
                         <Link class="nav-link active" aria-current="page" to="/SongUpload">Song Upload</Link>
+                        <Link class="nav-link active" aria-current="page" to="/Playlist">Playlist</Link>
                         <Link class="nav-link active" aria-current="page" to="/Chatroom">Chatroom</Link>
                     </div>
 

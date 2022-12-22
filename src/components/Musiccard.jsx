@@ -29,13 +29,20 @@ function Musiccard({title, artist, link, id}){
     };
 
     function deleteSong(){
-        try{
-            fetch("https://localhost:7023/Song/" + SongId, {method: "DELETE"});
-            console.log("delete");
+        if (window.location.href.includes("playlist")){
+            var playlistId = document.getElementById("playlistID").innerHTML;
+            fetch("https://localhost:7023/Playlist/" + playlistId + "/Song/" + SongId, {method: "DELETE"});
             window.location.reload();
         }
-        catch(err){
-            console.log(err);
+        else{
+            try{
+                fetch("https://localhost:7023/Song/" + SongId, {method: "DELETE"});
+                console.log("delete");
+                window.location.reload();
+            }
+            catch(err){
+                console.log(err);
+            }
         }
     }
 

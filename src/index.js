@@ -6,6 +6,7 @@ import SongUpload from "./pages/SongUpload";
 import Chatroom from "./pages/Chatroom";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Playlist from "./pages/Playlist";
 
 export default function Index() {
   return (
@@ -15,6 +16,7 @@ export default function Index() {
           <Route index element={<Home />} />
           <Route path="SongUpload" element={<SongUpload />} />
           <Route path="SongUpload" element={<SongUpload />} />
+          <Route path="Playlist" element={<Playlist />} />
           <Route path="Chatroom" element={<Chatroom />} />
           <Route path="Login" element={<Login />} />
           <Route path="Register" element={<Register />} />

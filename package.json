@@ -1,7 +1,7 @@
 {
   "name": "spotify-react",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "dependecies": {
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
@@ -24,9 +24,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts -r @cypress/instrument-cra start",
     "build": "CI=false && react-scripts build",
     "test": "react-scripts test",
+    "cypress": "cypress open",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -46,5 +47,24 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "dependencies": {
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@microsoft/signalr": "^7.0.0",
+    "@mui/material": "^5.11.0",
+    "bootstrap": "^5.2.3",
+    "cypress": "^12.1.0",
+    "firebase": "^9.15.0",
+    "react-router": "^6.5.0",
+    "react-router-dom": "^6.5.0",
+    "react-scripts": "^5.0.1"
+  },
+  "devDependencies": {
+    "@cypress/code-coverage": "^3.10.0",
+    "@cypress/instrument-cra": "^1.4.0",
+    "babel-plugin-istanbul": "^6.1.1",
+    "istanbul-lib-coverage": "^3.2.0",
+    "nyc": "^15.1.0"
   }
 }

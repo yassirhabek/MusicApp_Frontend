@@ -10,7 +10,6 @@ function Home() {
 
     useEffect(() => {
         getAllSongs();
-        console.log("dddd");
     }, []);
 
 
@@ -36,15 +35,14 @@ function Home() {
     if (isLoading) {
         return(
             <span className="loader"></span>
-    );
+        );
     }
     else {
-        console.log(localStorage.getItem("jwt"));
         return(
             <div className="gridContainer">
                 {Songs.map((song, index) => {
                     return (
-                        <div key={index}>
+                        <div key={index}> 
                             <MusicCard title={song.title} artist={song.artist} link={song.link} id={song.songID} />
                         </div>
                     );
