@@ -32,14 +32,14 @@ build-image:
     name: docker:stable
 
   variables:
-    DOCKER_HOST: tcp://docker:2375/
+    DOCKER_HOST: tcp://localhost:2375/
     DOCKER_DRIVER: overlay2
-    DOCKER_TLS_CERTDIR: ""
+    DOCKER_TLS_CERTDIR: "/cert"
 
   services:
    - name: docker:dind
 
-   
+
   script:
     - docker login -u yassirhabek -p Vredeoord123
     - docker build -t yassirhabek/spotifyfrontend:latest .
