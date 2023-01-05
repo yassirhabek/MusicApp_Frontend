@@ -4,11 +4,12 @@ import classes from "../css/Musiccard.module.css";
 import Trash from "../icons/trash.svg";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-function Musiccard({title, artist, link, id}){
+function Musiccard({title, artist, link, id, playlistId}){
     const Title = title;
     const Artist = artist;
     const SongLink = link;
     const SongId = id;
+    const PlaylistID = playlistId;
 
     const audioTune = new Audio(SongLink);
     useEffect(() => {
@@ -29,9 +30,9 @@ function Musiccard({title, artist, link, id}){
     };
 
     function deleteSong(){
-        if (window.location.href.includes("playlist")){
-            var playlistId = document.getElementById("playlistID").innerHTML;
-            fetch("https://localhost:7023/Playlist/" + playlistId + "/Song/" + SongId, {method: "DELETE"});
+        if (PlaylistID !== undefined){
+            console.log("delete playlist song");
+            fetch("https://localhost:7023/Playlist/" + PlaylistID + "/Song/" + SongId, {method: "DELETE", headers: {accept: 'application/json'}, credentials: 'include', withCredentials: true});
             window.location.reload();
         }
         else{

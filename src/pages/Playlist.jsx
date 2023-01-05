@@ -4,15 +4,12 @@ import Musiccard from "../components/Musiccard";
 
 import classes from "../css/Playlist.module.css";
 
-
 function Playlist() {
-    const [playlists, setPlaylists] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [Playlists, setPlaylists] = useState([]);
+    const [Loading, setLoading] = useState(true);
 
     useEffect(() => {
         getPlaylists();
-        console.log(loading);
-        console.log(playlists);
     }, []);
 
     async function getPlaylists(){
@@ -28,7 +25,7 @@ function Playlist() {
         }
 
         const result = await response.json();
-        setPlaylists({...result});
+        setPlaylists(result);
         setLoading(false);
         return result;
         } catch (err) {
@@ -36,31 +33,34 @@ function Playlist() {
         }
     }
 
-    if (loading) {
+    
+
+    if (Loading) {
         return(
             <span className="loader"></span>
         );
     }
     else {
+        console.log(Playlists);
         return(
             <div className={classes.container}>
-                {playlists.map((playlist, index) => {
-                    <div key={index}>
-                        <div>
-                            {playlist.name}
+                {Playlists.map((playlist, index) => {
+                    return(
+                        <div key={index} className={classes.playlist}>
+                            <h1 className={classes.playlistName}>
+                                {playlist.name}
+                            </h1><br />
+                            <div className={classes.songs}>
+                                {playlist.songs.map((song, index) => (
+                                    <div className={classes.song}>
+                                    <Musiccard key={index} title={song.title} artist={song.artist} link={song.link} id={song.songID} playlistId={playlist.id} />
+                                    </div>
+                                ))}
+                            </div>
                         </div>
-                        <div id='playlistId'>
-                            {playlist.id}
-                        </div>
-                        <div>
-                            {playlist.songs.map((song, index) => (
-                                <Musiccard key={index} title={song.title} artist={song.artist} link={song.link} id={song.songID} />
-                            ))}
-                        </div>
-                    </div>
-                })}   
+                    );
+                })}
             </div>
-            
         );
     }
 }
