@@ -29,16 +29,20 @@ build-image:
   stage: deploy
 
   image: 
-    name: docker:stable
+    name: docker:20.10.16
 
   variables:
-    DOCKER_HOST: tcp://localhost:2375/
+    DOCKER_HOST: tcp://docker:2375
     DOCKER_DRIVER: overlay2
     DOCKER_TLS_CERTDIR: ""
 
-  services:
-   - name: docker:dind
 
+  before_script:
+    - docker info 
+
+
+  services:
+    - docker:20.10.16-dind
 
   script:
     - docker login -u yassirhabek -p Vredeoord123
