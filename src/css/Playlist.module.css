@@ -37,3 +37,7 @@
     bottom: 10px;
 }
 
+.trash{
+    cursor: pointer;
+}
+

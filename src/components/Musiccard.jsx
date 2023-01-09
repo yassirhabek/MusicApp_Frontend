@@ -29,15 +29,15 @@ function Musiccard({title, artist, link, id, playlistId}){
     audioTune.currentTime = 0;
     };
 
-    function deleteSong(){
+    async function deleteSong(){
         if (PlaylistID !== undefined){
             console.log("delete playlist song");
-            fetch("https://localhost:7023/Playlist/" + PlaylistID + "/Song/" + SongId, {method: "DELETE", headers: {accept: 'application/json'}, credentials: 'include', withCredentials: true});
+            await fetch("https://localhost:7023/Playlist/" + PlaylistID + "/Song/" + SongId, {method: "DELETE", headers: {accept: 'application/json'}, credentials: 'include', withCredentials: true});
             window.location.reload();
         }
         else{
             try{
-                fetch("https://localhost:7023/Song/" + SongId, {method: "DELETE"});
+                await fetch("https://localhost:7023/Song/" + SongId, {method: "DELETE"});
                 console.log("delete");
                 window.location.reload();
             }
@@ -55,7 +55,7 @@ function Musiccard({title, artist, link, id, playlistId}){
                 <p className={classes.artistTitle}>{Artist}</p>
             </div>
 
-            <img src={Trash} class={classes.trashIcon} onClick={deleteSong}></img>
+            <img src={Trash} className={classes.trashIcon} onClick={deleteSong}></img>
             <button className={classes.btnPlay} onClick={playSound}>Play</button>
             <button className={classes.btnPause} onClick={pauseSound}>Pause</button>
             <button className={classes.btnStop} onClick={stopSound}>Stop</button>
