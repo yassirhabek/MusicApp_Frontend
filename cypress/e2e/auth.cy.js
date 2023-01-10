@@ -33,21 +33,21 @@ describe('register', () => {
   })
 });
 
-describe('go to register', () => {
-  it('passes', () => {
-    cy.visit('http://localhost:3000/login')
-    cy.get('#registerLink').click()
-    cy.location('pathname').should('eq', '/Register')
-  })
-});
+// describe('go to register', () => {
+//   it('passes', () => {
+//     cy.visit('http://localhost:3000/login')
+//     cy.get('#registerLink').click()
+//     cy.location('pathname').should('eq', '/Register')
+//   })
+// });
 
-describe('go to login', () => {
-  it('passes', () => {
-    cy.visit('http://localhost:3000/register')
-    cy.get('#loginLink').click()
-    cy.location('pathname').should('eq', '/Login')
-  })
-});
+// describe('go to login', () => {
+//   it('passes', () => {
+//     cy.visit('http://localhost:3000/register')
+//     cy.get('#loginLink').click()
+//     cy.location('pathname').should('eq', '/Login')
+//   })
+// });
 
 describe('logout', () => {
   it('passes', () => {

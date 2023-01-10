@@ -55,7 +55,7 @@ function Musiccard({title, artist, link, id, playlistId}){
                 <p className={classes.artistTitle}>{Artist}</p>
             </div>
 
-            <img src={Trash} className={classes.trashIcon} onClick={deleteSong}></img>
+            <img src={Trash} className={classes.trashIcon} onClick={deleteSong} id="deleteSong" />
             <button className={classes.btnPlay} onClick={playSound}>Play</button>
             <button className={classes.btnPause} onClick={pauseSound}>Pause</button>
             <button className={classes.btnStop} onClick={stopSound}>Stop</button>

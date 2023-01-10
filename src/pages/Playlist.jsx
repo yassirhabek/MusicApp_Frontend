@@ -63,6 +63,7 @@ function Playlist() {
         try{
             if (SongId === 0){
                 alert("Please select a song to add.");
+                return;
             }
             
             const response = await fetch('https://localhost:7023/Playlist/' + playlistId + '/Song/' + SongId, {
@@ -71,15 +72,17 @@ function Playlist() {
                 credentials: 'include',
                 withCredentials: true});
             
+            const result = await response.text();
+
             if (!response.ok){
-                alert(await response.json());
+                alert(result);
                 throw new Error(`Error! status: ${response.status}`);
             }
+
             alert("Song added to playlist!");
             window.location.href = "http://localhost:3000/playlist";
         } catch (err) {
-            console.log(err);
-            alert(err);
+            console.error(err);
         }
     }
 
@@ -134,28 +137,28 @@ function Playlist() {
         console.log(Playlists);
         return(
             <div className={classes.container}>
-                <input type="text" placeholder="Playlist Name" id="playlistName" className={classes.name} />
-                <button className={classes.create} onClick={createPlaylist}>Create Playlist</button>
-
+                <input type="text" placeholder="Playlist Name" id="playlistName" name="playlistName" className={classes.name} />
+                <button className={classes.create} onClick={createPlaylist} id="createPlaylist">Create Playlist</button>
+                <div id="playlists">
                 {Playlists.map((playlist, index) => {
                     return(
-                        <div key={index} className={classes.playlist}>
+                        <div key={index} className={classes.playlist} id={playlist.name}>
                             <h1 className={classes.playlistName}>
                                 {playlist.name}
                             </h1>
-                            <img className={classes.trash} src={Trash} alt="trash" onClick={() => deletePlaylist(playlist.id)}/>
+                            <img className={classes.trash} src={Trash} alt="trash" id="deletePlaylist" onClick={() => deletePlaylist(playlist.id)}/>
                             <br />
-                            <Form.Select aria-label="Choose a song to add." id="song" onChange={changeSong}>
+                            <select aria-label="Choose a song to add." id="songs" onClick={changeSong}>
                                 {Songs.map((song, index) => {
                                     return(
-                                        <option key={index} value={song.songID}>{song.title}</option>
+                                        <option key={index} value={song.songID} name={song.title}>{song.title}</option>
                                     );
                                 })}
-                            </Form.Select>
-                            <button className={classes.addSong} onClick={() => addSongToPlaylist(playlist.id)}>Add Song</button>
+                            </select>
+                            <button className={classes.addSong} id="addSong" onClick={() => addSongToPlaylist(playlist.id)}>Add Song</button>
                             <div className={classes.songs}>
                                 {playlist.songs.map((song, index) => (
-                                    <div className={classes.song}>
+                                    <div className={classes.song} id="song">
                                     <Musiccard key={index} title={song.title} artist={song.artist} link={song.link} id={song.songID} playlistId={playlist.id} />
                                     </div>
                                 ))}
@@ -163,6 +166,7 @@ function Playlist() {
                         </div>
                     );
                 })}
+                </div>
             </div>
         );
     }
