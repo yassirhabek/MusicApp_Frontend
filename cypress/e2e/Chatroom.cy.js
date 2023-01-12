@@ -26,6 +26,7 @@ describe('send message', () => {
 describe('check sent message', () => {
   it('passes', () => {
     cy.visit('http://localhost:3000/Chatroom');
+    cy.wait(500);
     cy.get('#messageField').type('test');
     cy.get('#buttonChat').click();
     cy.get('#messages').should('exist');

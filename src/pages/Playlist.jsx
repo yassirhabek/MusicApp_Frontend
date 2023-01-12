@@ -79,7 +79,6 @@ function Playlist() {
                 throw new Error(`Error! status: ${response.status}`);
             }
 
-            alert("Song added to playlist!");
             window.location.href = "http://localhost:3000/playlist";
         } catch (err) {
             console.error(err);
@@ -94,11 +93,14 @@ function Playlist() {
                 headers: { 'Content-Type': 'application/json' },
                 credentials: 'include',
                 withCredentials: true});
+
+            const result = await response.text();
             
             if (!response.ok){
-                alert(await response.json());
+                alert(result);
+                throw new Error(`Error! status: ${response.status}`);
             }
-            alert("Playlist created!");
+
             window.location.href = "http://localhost:3000/playlist";
         } catch (err) {
             console.log(err);
@@ -113,7 +115,10 @@ function Playlist() {
                 credentials: 'include',
                 withCredentials: true});
 
+            const result = await response.text();
+
             if (!response.ok) {
+                alert(result);
                 throw new Error(`Error! status: ${response.status}`);
             }
 
@@ -130,7 +135,11 @@ function Playlist() {
 
     if (Loading) {
         return(
-            <span className="loader"></span>
+            <div className={classes.container}>
+                <input type="text" placeholder="Playlist Name" id="playlistName" name="playlistName" className={classes.name} />
+                <button className={classes.create} onClick={createPlaylist} id="createPlaylist">Create Playlist</button>
+                <span className="loader"></span>
+            </div>
         );
     }
     else {
@@ -149,14 +158,15 @@ function Playlist() {
                             <img className={classes.trash} src={Trash} alt="trash" id="deletePlaylist" onClick={() => deletePlaylist(playlist.id)}/>
                             <br />
                             <select aria-label="Choose a song to add." id="songs" onClick={changeSong}>
+                                <option>Choose a song</option>
                                 {Songs.map((song, index) => {
                                     return(
-                                        <option key={index} value={song.songID} name={song.title}>{song.title}</option>
+                                        <option key={index} value={song.songID} id={song.title} name={song.title}>{song.title}</option>
                                     );
                                 })}
                             </select>
                             <button className={classes.addSong} id="addSong" onClick={() => addSongToPlaylist(playlist.id)}>Add Song</button>
-                            <div className={classes.songs}>
+                            <div className={classes.songs} id="songss">
                                 {playlist.songs.map((song, index) => (
                                     <div className={classes.song} id="song">
                                     <Musiccard key={index} title={song.title} artist={song.artist} link={song.link} id={song.songID} playlistId={playlist.id} />

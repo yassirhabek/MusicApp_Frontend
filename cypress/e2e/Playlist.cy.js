@@ -18,7 +18,7 @@ describe('create playlist', () => {
     cy.visit('http://localhost:3000/Playlist');
     cy.get('input[name="playlistName"]').type('testPlaylist');
     cy.get('#createPlaylist').click();
-    cy.get('#playlists').children().should('exist', 'testPlaylist');
+    cy.get('#playlists').children().should('exist', '#testPlaylist');
   })
 })
 
@@ -26,19 +26,22 @@ describe('add song to playlist', () => {
   it('passes', () => {
     cy.visit('http://localhost:3000/Playlist');
     cy.wait(1000);
-    cy.get('#testPlaylist > #songs').select('testSong');
+    cy.get('#testPlaylist > #songs').contains('testSong').then(($song) => {
+      cy.wrap($song).click({force : true});
+    });
     cy.get('#testPlaylist > #addSong').click();
-    cy.get('#playlists').children().get('#testPlaylist').children().should('exist', '');
+    cy.get('#playlists').children().get('#testPlaylist').children().get('#songss').should('exist', '');
   })
 });
 
-// describe('delete song from playlist', () => {
-//   it('passes', () => {
-//     cy.visit('http://localhost:3000/Playlist');
-//     cy.get('#testPlaylist > #song > #deleteSong').click();
-//     cy.get('#testPlaylist > #songs').should('not.exist', ''); 
-//   })
-// })
+describe('delete song from playlist', () => {
+  it('passes', () => {
+    cy.visit('http://localhost:3000/Playlist');
+    cy.get('#testPlaylist').children().get('#songss').get('#deleteSong').click({force : true});
+    cy.wait(1000);
+    cy.get('#testPlaylist').children().get('#songss').children().should('not.exist', ''); 
+  })
+})
 
 describe('delete playlist', () => {
   it('passes', () => {

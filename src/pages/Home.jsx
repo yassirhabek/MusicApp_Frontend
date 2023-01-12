@@ -34,7 +34,9 @@ function Home() {
 
     if (isLoading) {
         return(
-            <span className="loader"></span>
+            <div>
+                <span className="loader"></span>
+            </div>
         );
     }
     else {

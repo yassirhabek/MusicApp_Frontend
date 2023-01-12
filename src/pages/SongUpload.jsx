@@ -15,20 +15,23 @@ function SongUpload() {
     setFile(event.target.files[0]);
  }
 
- function postSong(songUrl){
+ async function postSong(songUrl){
   try{
     if (songUrl === " ") {
       throw new Error("No URL Found");
     }
     console.log("postSong");
-    const response = fetch("https://localhost:7023/Song?" + new URLSearchParams({
+    const response = await fetch("https://localhost:7023/Song?" + new URLSearchParams({
       title: document.getElementById("songName").value,
       artist: document.getElementById("artistName").value,
       songLink: songUrl}), {method: "POST"});
 
-      // if (!response.ok) {
-      //   throw new Error  (`Error! status: ${response.status}`);
-      // }
+      const result = await response.text();
+
+      if (!response.ok) {
+        alert(result);
+        throw new Error  (`Error! status: ${response.status}`);
+      }
 
       alert("Upload successful");
       window.location.href = "http://localhost:3000/";
